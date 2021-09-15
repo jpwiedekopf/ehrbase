@@ -155,7 +155,7 @@
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.3.5.RELEASE</version>
-        <relativePath/>
+        <relativePath />
         <!-- lookup parent from repository -->
     </parent>
 
@@ -201,37 +201,37 @@
 
             <!-- sdk -->
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>response-dto</artifactId>
                 <version>${ehrbase.sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>opt-1.4</artifactId>
                 <version>${ehrbase.sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>serialisation</artifactId>
                 <version>${ehrbase.sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>terminology</artifactId>
                 <version>${ehrbase.sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>validation</artifactId>
                 <version>${ehrbase.sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>web-template</artifactId>
                 <version>${ehrbase.sdk.version}</version>
             </dependency>
             <dependency>
-                <groupId>com.github.ehrbase.openEHR_SDK</groupId>
+                <groupId>com.github.jpwiedekopf.openEHR_SDK</groupId>
                 <artifactId>test-data</artifactId>
                 <version>${ehrbase.sdk.version}</version>
                 <scope>test</scope>
@@ -569,7 +569,7 @@
                     <artifactId>dockerfile-maven-plugin</artifactId>
                     <version>1.4.13</version>
                     <configuration>
-                        <dockerConfigFile/>
+                        <dockerConfigFile />
                     </configuration>
                 </plugin>
                 <plugin>
