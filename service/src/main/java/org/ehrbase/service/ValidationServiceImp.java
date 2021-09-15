@@ -44,6 +44,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 
 import static org.ehrbase.configuration.CacheConfiguration.VALIDATOR_CACHE;
 
@@ -137,10 +138,14 @@ public class ValidationServiceImp implements ValidationService {
 
         if (!rmObjectValidationMessages.isEmpty()) {
             StringBuilder stringBuilder = new StringBuilder();
+            stringBuilder.append(String.format("%d validation errors:\n", rmObjectValidationMessages.size()));
             for (RMObjectValidationMessage rmObjectValidationMessage : rmObjectValidationMessages) {
                 stringBuilder.append(rmObjectValidationMessage.toString());
                 stringBuilder.append("\n");
             }
+            logger.error("{} validation errors for upload:\n{}",
+                    rmObjectValidationMessages.size(),
+                    rmObjectValidationMessages.stream().map(Object::toString).collect(Collectors.joining("\n")));
             throw new IllegalArgumentException(stringBuilder.toString());
         }
 
