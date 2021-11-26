@@ -1,8 +1,9 @@
 # syntax=docker/dockerfile:1
-FROM --platform=$BUILDPLATFORM postgres:13.3-alpine AS builder
-ARG TARGETPLATFORM
-ARG BUILDPLATFORM
-RUN echo "Running on $BUILDPLATFORM, building EHRbase for $TARGETPLATFORM" > /log
+FROM postgres:13.3-alpine AS builder
+#FROM --platform=$BUILDPLATFORM postgres:13.3-alpine AS builder
+#ARG TARGETPLATFORM
+#ARG BUILDPLATFORM
+#RUN echo "Running on $BUILDPLATFORM, building EHRbase for $TARGETPLATFORM" > /log
 
 # SHOW POSTGRES SERVER AND CLIENT VERSION
 RUN postgres -V && \
@@ -88,7 +89,8 @@ RUN ls -la; \
 
 
 # FINAL EHRBASE IMAGE WITH JRE AND JAR ONLY
-FROM --platform=$BUILDPLATFORM openjdk:11-jre-slim AS final
+#FROM --platform=$BUILDPLATFORM openjdk:11-jre-slim AS final
+FROM openjdk:11-jre-slim AS final
 COPY --from=builder /tmp/ehrbase.jar .
 COPY --from=builder /tmp/ehrbase_version .
 COPY .docker_scripts/docker-entrypoint.sh .
