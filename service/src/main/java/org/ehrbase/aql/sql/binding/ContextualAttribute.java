@@ -52,8 +52,10 @@ public class ContextualAttribute {
             for (Iterator<QualifiedAqlField> qualifiedAqlFieldIterator = fields.iterator(); qualifiedAqlFieldIterator.hasNext();) {
                 QualifiedAqlField field = qualifiedAqlFieldIterator.next();
                 variableDefinition.setPath(originalPath);
-                if (originalPath != null)
-                    field.setField(field.getSQLField().as("/" + originalPath));
+                if (originalPath != null) {
+                    //field.setField(field.getSQLField().as("/" + originalPath)); // FIXME[JPW] FallID ist lost HERE!
+                }
+
                 else
                     field.setField(field.getSQLField().as(variableDefinition.getIdentifier()));
             }
