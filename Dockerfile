@@ -27,11 +27,21 @@ RUN su - postgres -c "pg_ctl -D ${PGDATA} -w start" && \
     su - postgres -c "pg_ctl -D ${PGDATA} -w stop"
 
 # INSTALL JAVA 17 JDK
-ENV JAVA_HOME /usr/lib/jvm/java-17-temurin
+ENV JAVA_HOME /usr/lib/jvm/java-17
 ENV PATH $JAVA_HOME/bin:$PATH
-RUN wget -O /etc/apk/keys/adoptium.rsa.pub https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk && \
-    echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
-    su -c "apk add temurin-17" && \
+RUN mkdir -p /usr/lib/jvm && \
+    if [ $TARGETPLATFORM = "linux/arm64" ]; \
+    then wget -O /usr/lib/jvm/azul.tar.gz https://cdn.azul.com/zulu/bin/zulu17.38.21-ca-jdk17.0.5-linux_musl_aarch64.tar.gz && \
+         export JVM_DEST="${JAVA_HOME}-azul" && \
+         mkdir -p $JVM_DEST && \
+         tar xvzf /usr/lib/jvm/azul.tar.gz -C ${JAVA_HOME}-azul --strip-components=1 && \
+         rm -v /usr/lib/jvm/azul.tar.gz; \
+    else wget -O /etc/apk/keys/adoptium.rsa.pub https://packages.adoptium.net/artifactory/api/security/keypair/public/repositories/apk && \
+         echo 'https://packages.adoptium.net/artifactory/apk/alpine/main' >> /etc/apk/repositories && \
+         su -c "apk add temurin-17" && \
+         export JVM_DEST="${JAVA_HOME}-temurin"; \
+    fi && \
+    ln -s $JVM_DEST $JAVA_HOME && \
     java --version
 
 # INSTALL MAVEN
